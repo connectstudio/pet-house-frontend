@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { AuthContext } from '../context/AuthContext'
-import Loading from '../components/Loading'
 import { zodResolver } from "@hookform/resolvers/zod"
+import Loading from '../components/Loading'
 import Input from '../components/Input'
+import Password from '../components/Password'
 import InputRoot from '../components/InputRoot'
+import Label from '../components/Label'
+import Button from '../components/Button'
 
 function Login() {
 
@@ -37,33 +39,54 @@ function Login() {
   }
 
   return (
-    <section className=" h-screen item">
-      <div className="flex flex-col items-center h-full justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          Enfermagem
-        </a>
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Entre na sua conta
-            </h1>
-            <form onSubmit={handleSubmit(handleSingIn)} className="space-y-4 md:space-y-6" action="#">
-              <InputRoot label={"E-Mail"} error={errors.email}>
-                <Input register={register('email')} />
-              </InputRoot>
-              <InputRoot label={"Senha"} error={errors.password}>
-                <Input register={register('password')} />
-              </InputRoot>
-              <div className="h-20 flex justify-center items-center">
-                {loginLoading ?
-                  <Loading visible={true} className={"w-10 h-10"}></Loading> :
-                  <button type="submit" className="w-full bg-purple-600 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Entrar</button>
-                }
-              </div>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                <Link to="/signup" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Cadastre-se</Link>
-              </p>
-            </form>
+    <section className="gradient-form h-screen w-full bg-neutral-200 ">
+      <div className="h-full w-full ">
+        <div className="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800 ">
+          <div className="g-0 h-full lg:flex-row flex-col flex lg:flex-wrap">
+            <div className="flex-1 md:mx-6 md:p-12 flex items-center justify-center flex-col p-10">
+              <form className='flex flex-col gap-4'>
+                <h4 className=" pb-1 text-3xl font-semibold text-zinc-800">
+                  Supets
+                </h4>
+                <p>Bem vindo de volta</p>
+                <InputRoot label={"E-Mail"} error={errors.email}>
+                  <Label className="text-zinc-800">E-Mail</Label>
+                  <Input 
+                    className="bg-transparent border border-zinc-800 p-2 rounded outline-none"
+                    register={register('email')} />
+                </InputRoot>
+                <InputRoot label={"Senha"} error={errors.password}>
+                  <Label className="text-zinc-800">Senha</Label>
+                  <Password 
+                    className="bg-transparent border border-zinc-800 p-2 rounded outline-none"
+                    register={register('password')} />
+                </InputRoot>
+                <Button                     
+                  className="h-10 mb-3 flex items-center justify-center w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  style={{
+                    background:" linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)"
+                  }}
+                  submit={handleSubmit(handleSingIn)}
+                  loading={loginLoading}
+                  loadingComponent = {<Loading visible={true} className="w-5 h-5"/>}
+                  >
+                    Entrar
+                </Button>
+              </form>
+            </div>
+            <div className="text-white flex-1 flex justify-center items-center flex-col p-5"
+              style={{background: "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)"}}>
+                <h4 className="mb-6 text-xl font-semibold">
+                  We are more than just a company
+                </h4>
+                <p className="text-sm">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing
+                  elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis
+                  nostrud exercitation ullamco laboris nisi ut aliquip ex
+                  ea commodo consequat.
+                </p>
+            </div>
           </div>
         </div>
       </div>
